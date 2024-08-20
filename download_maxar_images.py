@@ -4,7 +4,7 @@ import os, glob
 import argparse
 import leafmap
 
-
+# download every avaliable satellite images of the disaster
 def download_all_images(des, disaster):
     collections = leafmap.maxar_child_collections(disaster)
     url = f'https://raw.githubusercontent.com/opengeos/maxar-open-data/master/datasets/{disaster}_union.geojson'
@@ -30,6 +30,7 @@ def download_all_images(des, disaster):
     print("Completed Downloading Images for: " + disaster)
 
 
+# download satellite images with ids in image pairs csv file
 def download_image_ids(des, disaster, img_ids):
     if not os.path.exists(des):
         os.mkdir(des)
