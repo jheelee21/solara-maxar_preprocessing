@@ -19,13 +19,15 @@ def parse_arguments():
     parser.add_argument('--size', type=int, default=256, help='Width and height in pixel of a tile') 
     parser.add_argument('--threshold', type=int, default=500, help='Maximum number of white pixels allowed in cropped images') 
     
-    parser.add_argument('--src', type=str, default='./images/', help='Source path for original image tiff files')
+    parser.add_argument('--src', type=str, default='./images/', help='Source path for original image tiff files - TIFF files should be located in {src}/{imageID}/*.tiff')
     parser.add_argument('--des', type=str, default='../../data/delta/maxar/', help='Destination path for processed images')
     
     parser.add_argument('--d', type=str, required=True, help='Name of the disaster')
     
     parser.add_argument('--pre_post', type=str, default='./pre_post.csv', help='CSV file containing pre and post image id pairs')
     parser.add_argument('--pre_pre', type=str, default='./pre_pre.csv', help='CSV file containing pre1 and pre2 image id pairs')
+    
+    parser.add_argument('--download', type=bool, default=True, help='Option to download TIFF files from solara-maxar catalogue')
     
     args = parser.parse_args()
     return args
@@ -221,7 +223,8 @@ if __name__ == '__main__':
     
     pre_post_pair, pre_pre_pair, all_img_ids = get_img_pairs(args)
     
-    download_image_ids(src, disaster, all_img_ids)
+    if args.download:
+        download_image_ids(src, disaster, all_img_ids)
     
     crop_images(z, p, size, src, cropped_des, all_img_ids)
     prune_images(z, cropped_des, threshold, all_img_ids)
