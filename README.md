@@ -60,3 +60,11 @@ To ensure optimal performance of DAVI, raw satellite images undergo several prep
      - Have excessive cloud coverage
      - Depict only natural landscapes (mountains, plains) without built structures
      - Are distorted or unclear, making building identification difficult
+    
+# Requirements
+
+To run the code, the following dependencies are required:
+
+```pip install numpy opencv-python gdal gdal2tiles geopandas requests leafmap```
+
+Ensure that GDAL is properly installed on your system. You may need to install it separately depending on your operating system.
